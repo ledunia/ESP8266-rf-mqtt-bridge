@@ -7,11 +7,15 @@
 
 #define WIFI_SSID "..."
 #define WIFI_PASSWORD "..."
+const char* mqtt_username = "...";
+const char* mqtt_password = "...";
 
 #define MQTT_TOPIC "switch/rf/+"
 
 #define TX_PIN 4 // Receiver on GPIO4 / D2.
 #define TX_REPEAT 15
+
+
 
 RCSwitch mySwitch = RCSwitch();
 WiFiClient espClient;
@@ -132,7 +136,7 @@ void reconnect() {
     // Attempt to connect
     // If you do not want to use a username and password, change next line to
     // if (client.connect("ESP8266Client")) {
-    if (client.connect("ESP8266Client")) {
+    if (client.connect("ESP8266Client", mqtt_username, mqtt_password)) {
       Serial.println("connected");
       // Subscribe to the topic
       client.subscribe(MQTT_TOPIC);
